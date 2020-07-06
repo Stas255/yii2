@@ -1,0 +1,208 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,700,600);
+@import url(https://fonts.googleapis.com/css?family=Merriweather:400,700,400italic);
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    background: #F4F4F4;
+}
+
+.main-content {
+    margin-top: 50px;
+}
+
+.row {
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+.post {
+    background: #fff;
+    margin-bottom: 50px;
+}
+
+article {
+    border: 1px solid #eee;
+}
+
+a {
+    text-decoration: none;
+    display: inline-block;
+}
+
+.post-content {
+    padding: 0 43px;
+    overflow: hidden;
+}
+
+.post-thumb img {
+    width: 100%;
+}
+
+.post-thumb {
+    position: relative;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+
+.entry-header {
+    margin: 40px 0 23px;
+}
+
+.entry-header h1 {
+    margin-top: 0;
+    font-size: 24px;
+}
+
+span, p, input {
+    font-family: 'Merriweather', serif;
+    line-height: 26px;
+}
+
+.post .social-share {
+    border-top: 1px solid #EEE;
+    padding: 15px 0 75px;
+}
+
+.social-share-title {
+    padding: 9px 0;
+    font-style: italic;
+    font-size: 13px;
+}
+
+.pagination {
+    display: inline-block;
+    padding-left: 0;
+    margin: 0 0 50px;
+    border-radius: 4px;
+}
+
+.entry-header h1 a:hover {
+    color: #00acdf;
+}
+.entry-header h1 a {
+    font-weight: 600;
+    color: #333333;
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s;
+    font-size: 24px;
+    line-height: 34px;
+}
+
+.social-share ul li {
+    list-style: none;
+    display: inline-block;
+}
+
+.social-share ul li a i {
+    height: 30px;
+    width: 30px;
+    line-height: 30px;
+    font-size: 15px;
+    border-radius: 50%;
+    margin: 3px;
+    border: 1px solid #e5e5e5;
+    -webkit-transition: all 0.4s;
+    transition: all 0.4s;
+    color: #C2C2C2;
+}
+
+.social-share span a {
+    color: #333;
+}
+
+.pagination > li > a, .pagination > li > span {
+    position: relative;
+    float: left;
+    padding: 6px 12px;
+    margin-left: 5px;
+    line-height: 1.42857143;
+    color: #333;
+    text-decoration: none;
+    background-color: #fff;
+    border: 0;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+    font-weight: 600;
+}
+
+
+
+
+/*Бокове*/
+
+.widget {
+    padding: 37px 30px;
+    margin-bottom: 35px;
+    background-color: #fff;
+    border: 1px solid #eee;
+}
+
+.widget-title {
+    font-size: 18px;
+    margin: 0 0 25px;
+    letter-spacing: 0.5px;
+    color: #333333;
+}
+
+.widget .popular-post:first-of-type {
+    padding-top: 0;
+}
+
+.popular-post {
+    border-bottom: 1px solid #eee;
+    padding: 25px 0 20px;
+}
+
+.popular-img {
+    position: relative;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.popular-img img {
+    width: 100%;
+}
+
+img {
+    max-width: 100%;
+}
+
+.p-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    -webkit-transition: all 0.44s;
+    transition: all 0.44s;
+}
+
+.p-content a {
+    font-size: 12px;
+    color: #333333;
+    text-decoration: none;
+    display: block;
+    font-weight: 600;
+    transition: all 0.44s;
+}
+
+.p-content span {
+    color: #666666;
+    font-size: 12px;
+    font-style: italic;
+}
+
+
