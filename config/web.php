@@ -51,6 +51,10 @@ $config = [
             'rules' =>array(
                 ''=>'site/index',
                 '<action>'=>'site/<action>',
+                'admin/index' => 'admin/default/index',
+                '<action>'=>'default/<action>',
+                '/login' => 'site/login',
+                '<action>'=>'site/<action>',
             ),
         ],
     ],

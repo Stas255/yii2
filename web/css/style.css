@@ -136,9 +136,6 @@ span, p, input {
     font-weight: 600;
 }
 
-
-
-
 /*Бокове*/
 
 .widget {
@@ -205,4 +202,75 @@ img {
     font-style: italic;
 }
 
+/*Коментарі*/
 
+body .tab-content .comment {
+    background: #fff;
+    padding: 10px;
+}
+body .comment {
+    position: relative;
+    border-bottom: 1px solid #c7b8b8;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+body .comment-img {
+    float: left;
+    margin-right: 10px;
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    position: relative;
+}
+
+body .comment-body {
+    margin-left: 110px;
+}
+
+body .comment-top {
+    display: flex;
+    justify-content: space-between;
+}
+
+body .comment-date {
+    font-size: 12px;
+}
+
+body .comment-text {
+    word-break: break-word;
+    padding-right: 10px;
+}
+
+body .comment-childs-container {
+    transition: max-height .4s;
+}
+
+body .comment-more-button {
+    text-align: center;
+    padding: 8px 8px 8px 30px;
+    border: 1px solid #e2e2e2;
+    border-top: none;
+    cursor: pointer;
+}
+
+body .comment-childs {
+    padding: 10px 0 10px 50px;
+}
+
+a.replay.btn.pull-right {
+    padding: 8px 7px;
+    display: inline-block;
+    font-size: 12px;
+    cursor: pointer;
+    margin-left: 10px;
+    color: #333;
+    background-color: white;
+    border: 1px solid #e2e2e2;
+}
+
+img.img-round {
+    border-radius: 50%;
+    height: 100px;
+    width: 100px;
+}
