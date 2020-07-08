@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\Article;
+use app\models\Topic;
 use Yii;
 use yii\data\Pagination;
 use yii\filters\AccessControl;
@@ -61,29 +62,35 @@ class SiteController extends Controller
      *
      * @return string
      */
+
+
     public function actionIndex()
     {
-        $query = Article::find();
+        $data = Article::getAll(1);
 
-        $count = $query->count();
-
-        // create a pagination object with the total count
-        $pagination = new Pagination(['totalCount' => $count, 'pageSize' => 1]);
-
-        // limit the query using the pagination and retrieve the articles
-        $articles = $query->offset($pagination->offset)
-            ->limit($pagination->limit)
-            ->all();
+        $popular = Article::find()->orderBy('viewed desc')->limit(3)->all();
+        $recent = Article::find()->orderBy('date asc')->limit(3)->all();
+        $topics =Topic::find()->all();
 
         return $this->render('index',[
-            'articles'=>$articles,
-            'pagination'=>$pagination
+            'articles'=>$data['articles'],
+            'pagination'=>$data['pagination'],
+            'popular'=>$popular,
+            'recent'=>$recent,
+            'topics'=>$topics
         ]);
     }
 
     public function actionView()
     {
-        return $this->render('single');
+        $popular = Article::find()->orderBy('viewed desc')->limit(3)->all();
+        $recent = Article::find()->orderBy('date asc')->limit(3)->all();
+        $topics =Topic::find()->all();
+        return $this->render('single',[
+            'popular'=>$popular,
+            'recent'=>$recent,
+            'topics'=>$topics
+        ]);
     }
 
 

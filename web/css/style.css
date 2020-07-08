@@ -274,3 +274,28 @@ img.img-round {
     height: 100px;
     width: 100px;
 }
+
+/*Категорія*/
+.widget ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.widget.border ul li:first-child {
+    padding-top: 0;
+}
+.widget.border ul li {
+    border-bottom: 1px solid #eeeeee;
+    padding: 6px 0 6px 12px;
+    position: relative;
+}
+.widget ul li a {
+    line-height: 26px;
+    font-size: 12px;
+    font-weight: 500;
+    color: #323232;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-family: 'Merriweather', serif;
+    transition: all 0.33s;
+}

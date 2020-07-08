@@ -74,9 +74,6 @@ AppAsset::register($this);
                 <div class="row">
 
                     <?= $content ?>
-                    <?php
-                    include(Yii::getAlias('@app/views/site/right.php'));
-                    ?>
 
                 </div>
             </div>

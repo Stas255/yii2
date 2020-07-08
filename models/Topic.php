@@ -12,6 +12,7 @@ use Yii;
  */
 class Topic extends \yii\db\ActiveRecord
 {
+
     /**
      * {@inheritdoc}
      */
@@ -28,6 +29,10 @@ class Topic extends \yii\db\ActiveRecord
         return [
             [['name'], 'string', 'max' => 255],
         ];
+    }
+
+    public function getArticles(){
+        return $this->hasMany(Article::className(),['topic_id'=>'id']);
     }
 
     /**
