@@ -151,4 +151,9 @@ class User extends \yii\db\ActiveRecord implements IdentityInterface
     {
         return $this->save(false);
     }
+
+    public function getLogin()
+    {
+        return $this->login;
+    }
 }
