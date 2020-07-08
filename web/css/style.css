@@ -243,8 +243,9 @@ body .tab-content .comment {
 body .comment {
     position: relative;
     border-bottom: 1px solid #c7b8b8;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding: 10px;
+    min-height: 120px;
+    background-color: white;
 }
 
 body .comment-img {

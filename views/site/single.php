@@ -28,7 +28,7 @@ use yii\helpers\Url;
 
             <div class="social-share">
 							<span
-                                    class="social-share-title pull-left text-capitalize">By Rubel On <?= $article->getDate(); ?></span>
+                                    class="social-share-title pull-left text-capitalize">By <?= $article->user->name;  ?> On <?= $article->getDate(); ?></span>
                 <ul class="text-center pull-right">
                     <li><a class="s-facebook" href="#"><i class="fa fa-facebook"></i></a></li>
                     <li><a class="s-twitter" href="#"><i class="fa fa-twitter"></i></a></li>
@@ -39,22 +39,23 @@ use yii\helpers\Url;
             </div>
         </div>
     </article>
-
-    <?php $form = \yii\widgets\ActiveForm::begin([
-        'action' => ['site/comment', 'id' => $article->id],
-        'options' => ['class' => '', 'role' => 'form']]) ?>
-    <div class="leave-comment"><!--leave comment-->
-        <h4>Leave a reply</h4>
-        <form class="form-horizontal contact-form" role="form" method="post" action="#">
-            <div class="form-group">
-                <div class="col-md-12">
-                    <?= $form->field($commentForm, 'comment')->textarea(['class'=>'form-control','placeholder'=>'Write Message'])->label(false)?>
+    <?php if (!Yii::$app->user->isGuest): ?>
+        <?php $form = \yii\widgets\ActiveForm::begin([
+            'action' => ['site/comment', 'id' => $article->id],
+            'options' => ['class' => '', 'role' => 'form']]) ?>
+        <div class="leave-comment"><!--leave comment-->
+            <h4>Leave a reply</h4>
+            <form class="form-horizontal contact-form" role="form" method="post" action="#">
+                <div class="form-group">
+                    <div class="col-md-12">
+                        <?= $form->field($commentForm, 'comment')->textarea(['class' => 'form-control', 'placeholder' => 'Write Message'])->label(false) ?>
+                    </div>
                 </div>
-            </div>
-            <button type="submit" class="btn send-btn">Post Comment</button>
-            <?php \yii\widgets\ActiveForm::end() ?>
-        </form>
-    </div><!--end leave comment-->
+                <button type="submit" class="btn send-btn">Post Comment</button>
+                <?php \yii\widgets\ActiveForm::end() ?>
+            </form>
+        </div><!--end leave comment-->
+    <?php endif; ?>
 
 
     <?php if (!empty($comments)): ?>
@@ -63,7 +64,7 @@ use yii\helpers\Url;
                 <div class="comment-block">
                     <div class="comment">
                         <a href="#" class="comment-img">
-                            <img class="img-round" src="<?= $comment->user->image; ?>" alt="">
+                            <img class="img-round" src="<?= $comment->user->getImage(); ?>" alt="">
                         </a>
                         <div class="comment-body">
                             <div class="comment-top">
@@ -130,6 +131,7 @@ use yii\helpers\Url;
             <?php endforeach; ?>
         </div>
     <?php endif; ?>
+
 </div>
 <?php
 echo \Yii::$app->view->renderFile('@app/views/site/right.php', compact('popular', 'recent', 'topics'));

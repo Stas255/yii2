@@ -41,6 +41,7 @@ class Article extends \yii\db\ActiveRecord
             [['date'], 'date', 'format' => 'php:Y-m-d'],
             [['date'], 'default', 'value' => date('Y-m-d')],
             [['title'], 'string', 'max' => 255],
+
         ];
     }
 
@@ -130,6 +131,16 @@ class Article extends \yii\db\ActiveRecord
     {
 
         return $this->hasMany(Comment::className(), ['article_id' => 'id']);
+    }
+
+    public function getUser()
+    {
+        return $this->hasOne(User::className(), ['id' => 'user_id']);
+    }
+    public function viewedCounter()
+    {
+        $this->viewed +=1;
+        return $this->save(false);
     }
 }
 
