@@ -77,6 +77,10 @@ class Article extends \yii\db\ActiveRecord
         return '/no-image.png';
     }
 
+    public function getTopic(){
+        return $this->hasOne(Topic::className(),['id'=>'topic_id']);
+    }
+
     public function  deleteImage()
     {
         $imageUploadModel = new ImageUpload();
