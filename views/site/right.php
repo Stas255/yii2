@@ -1,3 +1,6 @@
+<?php
+use yii\helpers\Url;
+?>
 <div class="col-md-4" data-sticky_column>
     <div class="primary-sidebar">
 
@@ -45,7 +48,7 @@
             <ul>
                 <?php foreach ($topics as $topic): ?>
                 <li>
-                    <a href="#"><?= $topic->name;  ?></a>
+                    <a href="<?= Url::toRoute(['/topic', 'id'=>$topic->id]) ?>"><?= $topic->name;  ?></a>
                     <span class="post-count pull-right"> (<?= $topic->getArticles()->count();  ?>)</span>
                 </li>
                 <?php endforeach; ?>

@@ -299,3 +299,29 @@ img.img-round {
     font-family: 'Merriweather', serif;
     transition: all 0.33s;
 }
+
+/*topicSite*/
+.post-list .post-content {
+    padding: 0 20px 0 0;
+    overflow: hidden;
+}
+.post-list .entry-header {
+    margin: 22px 0;
+}
+.entry-header h6 a {
+    color: #00acdf;
+    font-weight: 700;
+    font-size: 10px;
+}
+.entry-header h1 a, .entry-header h6 a {
+    text-decoration: none;
+    letter-spacing: 0.5px;
+}
+.post-grid .entry-header h1, .post-list .entry-header h1 {
+    margin: 0;
+    line-height: 24px;
+}
+.post-grid .entry-header h1 a, .post-list .entry-header h1 a {
+    font-size: 18px;
+    line-height: 24px;
+}

@@ -81,12 +81,30 @@ class SiteController extends Controller
         ]);
     }
 
-    public function actionView()
+    public function actionView($id)
     {
+        $article = Article::findOne($id);
         $popular = Article::find()->orderBy('viewed desc')->limit(3)->all();
         $recent = Article::find()->orderBy('date asc')->limit(3)->all();
         $topics =Topic::find()->all();
         return $this->render('single',[
+            'article'=>$article,
+            'popular'=>$popular,
+            'recent'=>$recent,
+            'topics'=>$topics
+        ]);
+    }
+
+    public function actionTopic($id)
+    {
+        $data = Topic::getArticlesByTopic($id);
+        $popular = Article::find()->orderBy('viewed desc')->limit(3)->all();
+        $recent = Article::find()->orderBy('date asc')->limit(3)->all();
+        $topics =Topic::find()->all();
+
+        return $this->render('topic',[
+            'articles'=>$data['articles'],
+            'pagination'=>$data['pagination'],
             'popular'=>$popular,
             'recent'=>$recent,
             'topics'=>$topics

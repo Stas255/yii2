@@ -1,79 +1,21 @@
+<?php
+use yii\helpers\Url;
+?>
 <div class="col-md-8">
     <article class="post">
         <div class="post-thumb">
-            <a href="blog.html"><img src="assets/images/blog-1.jpg" alt=""></a>
+            <a href="blog.html"><img src="<?= $article->getImage()  ?>" alt=""></a>
         </div>
         <div class="post-content">
             <header class="entry-header text-center text-uppercase">
-                <h6><a href="#"> Travel</a></h6>
+                <h6><a href="<?= Url::toRoute(['/topic', 'id'=>$article->topic->id]) ?>"> <?= $article->topic->name;  ?></a></h6>
 
-                <h1 class="entry-title"><a href="blog.html">Home is peaceful place</a></h1>
+                <h1 class="entry-title"><a href="blog.html"><?= $article->title;  ?></a></h1>
 
 
             </header>
             <div class="entry-content">
-                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
-                    tevidulabore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et
-                    justo duo dolores rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem
-                    ipsum dolor sit am Lorem ipsum dolor sitconsetetur sadipscing elitr, sed diam nonumy
-                    eirmod tempor invidunt ut labore et dolore maliquyam erat, sed diam voluptua.
-                </p>
-
-                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirtempor
-                    invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero accusam et
-                    justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctusest
-                    Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elised
-                    diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sdiam
-                    voluptua. At vero eos et accusam.
-                </p>
-
-                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirtempor
-                    invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero accusam et
-                    justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctusest
-                    Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elised
-                    diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sdiam
-                    voluptua. At vero eos et accusam.
-                </p>
-
-                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirtempor
-                    invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero accusam et
-                    justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctusest
-                    Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elised
-                    diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sdiam
-                    voluptua. At vero eos et accusam.
-                </p>
-
-                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirtempor
-                    invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero accusam et
-                    justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctusest
-                    Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elised
-                    diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sdiam
-                    voluptua. At vero eos et accusam.
-                </p>
-
-                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirtempor
-                    invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero accusam et
-                    justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctusest
-                    Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elised
-                    diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sdiam
-                    voluptua. At vero eos et accusam.
-                </p>
-
-                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirtempor
-                    invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero accusam et
-                    justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctusest
-                    Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elised
-                    diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sdiam
-                    voluptua. At vero eos et accusam.
-                </p>
-
-                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirtempor
-                    invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero accusam et
-                    justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctusest
-                    Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elised
-                    diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sdiam
-                    voluptua. At vero eos et accusam.
-                </p>
+                <?= $article->description;  ?>
             </div>
             <div class="decoration">
                 <a href="#" class="btn btn-default">Decoration</a>
@@ -82,7 +24,7 @@
 
             <div class="social-share">
 							<span
-                                    class="social-share-title pull-left text-capitalize">By Rubel On February 12, 2016</span>
+                                    class="social-share-title pull-left text-capitalize">By Rubel On <?= $article->getDate();  ?></span>
                 <ul class="text-center pull-right">
                     <li><a class="s-facebook" href="#"><i class="fa fa-facebook"></i></a></li>
                     <li><a class="s-twitter" href="#"><i class="fa fa-twitter"></i></a></li>
@@ -251,7 +193,5 @@
     </div>
 </div>
 <?php
-echo \Yii::$app->view->renderFile('@app/views/site/right.php', compact('popular'));
+echo \Yii::$app->view->renderFile('@app/views/site/right.php', compact('popular','recent','topics'));
 ?>
-
-

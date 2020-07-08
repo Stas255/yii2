@@ -1,14 +1,19 @@
+<?php
+use yii\helpers\Url;
+use yii\widgets\LinkPager;
+?>
+
 <div class="col-md-8">
     <?php foreach ($articles as $article): ?>
         <article class="post">
             <div class="post-thumb">
-                <a href="blog.html"><img src="<?= $article->getImage()  ?>" alt=""></a>
+                <a href="<?= Url::toRoute(['/view', 'id'=>$article->id]) ?>"><img src="<?= $article->getImage()  ?>" alt=""></a>
             </div>
             <div class="post-content">
                 <header class="entry-header text-center text-uppercase">
-                    <h6><a href="#"> <?= $article->topic->name;  ?></a></h6>
+                    <h6><a href="<?= Url::toRoute(['/topic', 'id'=>$article->topic->id]) ?>"> <?= $article->topic->name;  ?></a></h6>
 
-                    <h1 class="entry-title"><a href="blog.html"><?= $article->title;  ?></a></h1>
+                    <h1 class="entry-title"><a href="<?= Url::toRoute(['/view', 'id'=>$article->id]) ?>"><?= $article->title;  ?></a></h1>
 
 
                 </header>
@@ -17,7 +22,7 @@
                     </p>
 
                     <div class="btn-continue-reading text-center text-uppercase">
-                        <a href="blog.html" class="more-link">Continue Reading</a>
+                        <a href="<?= Url::toRoute(['/view', 'id'=>$article->id]) ?>" class="more-link">Continue Reading</a>
                     </div>
                 </div>
                 <div class="social-share">
@@ -32,8 +37,6 @@
      <?php endforeach; ?>
 
     <?php
-
-    use yii\widgets\LinkPager;
 
     echo LinkPager::widget([
     'pagination' => $pagination,
