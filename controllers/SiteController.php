@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\Article;
+use app\models\CommentForm;
 use app\models\Topic;
 use Yii;
 use yii\data\Pagination;
@@ -70,14 +71,14 @@ class SiteController extends Controller
 
         $popular = Article::find()->orderBy('viewed desc')->limit(3)->all();
         $recent = Article::find()->orderBy('date asc')->limit(3)->all();
-        $topics =Topic::find()->all();
+        $topics = Topic::find()->all();
 
-        return $this->render('index',[
-            'articles'=>$data['articles'],
-            'pagination'=>$data['pagination'],
-            'popular'=>$popular,
-            'recent'=>$recent,
-            'topics'=>$topics
+        return $this->render('index', [
+            'articles' => $data['articles'],
+            'pagination' => $data['pagination'],
+            'popular' => $popular,
+            'recent' => $recent,
+            'topics' => $topics
         ]);
     }
 
@@ -86,12 +87,18 @@ class SiteController extends Controller
         $article = Article::findOne($id);
         $popular = Article::find()->orderBy('viewed desc')->limit(3)->all();
         $recent = Article::find()->orderBy('date asc')->limit(3)->all();
-        $topics =Topic::find()->all();
-        return $this->render('single',[
-            'article'=>$article,
-            'popular'=>$popular,
-            'recent'=>$recent,
-            'topics'=>$topics
+        $topics = Topic::find()->all();
+
+        $comments = $article->comments;
+        $commentForm = new CommentForm();
+
+        return $this->render('single', [
+            'article' => $article,
+            'popular' => $popular,
+            'recent' => $recent,
+            'topics' => $topics,
+            'comments' => $comments,
+            'commentForm' => $commentForm,
         ]);
     }
 
@@ -100,18 +107,30 @@ class SiteController extends Controller
         $data = Topic::getArticlesByTopic($id);
         $popular = Article::find()->orderBy('viewed desc')->limit(3)->all();
         $recent = Article::find()->orderBy('date asc')->limit(3)->all();
-        $topics =Topic::find()->all();
+        $topics = Topic::find()->all();
 
-        return $this->render('topic',[
-            'articles'=>$data['articles'],
-            'pagination'=>$data['pagination'],
-            'popular'=>$popular,
-            'recent'=>$recent,
-            'topics'=>$topics
+        return $this->render('topic', [
+            'articles' => $data['articles'],
+            'pagination' => $data['pagination'],
+            'popular' => $popular,
+            'recent' => $recent,
+            'topics' => $topics
         ]);
     }
 
+    public function actionComment($id)
+    {
+        $model = new CommentForm();
 
+        if (Yii::$app->request->isPost)
+        {
+            $model->load(Yii::$app->request->post());
+            if($model->saveComment($id))
+            {
+                return $this->redirect(['site/view','id'=>$id]);
+            }
+        }
+    }
 
 
     /**

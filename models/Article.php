@@ -36,11 +36,11 @@ class Article extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title','description','tag','viewed','topic_id','user_id'], 'required'],
-            [['title','description'], 'string'],
-            [['date'], 'date', 'format'=>'php:Y-m-d'],
-            [['date'], 'default', 'value'=> date('Y-m-d')],
-            [['title'], 'string', 'max'=>255],
+            [['title', 'description', 'tag', 'viewed', 'topic_id', 'user_id'], 'required'],
+            [['title', 'description'], 'string'],
+            [['date'], 'date', 'format' => 'php:Y-m-d'],
+            [['date'], 'default', 'value' => date('Y-m-d')],
+            [['title'], 'string', 'max' => 255],
         ];
     }
 
@@ -62,7 +62,7 @@ class Article extends \yii\db\ActiveRecord
         ];
     }
 
-    public function  saveImage($filename)
+    public function saveImage($filename)
     {
         $this->image = $filename;
 
@@ -71,18 +71,18 @@ class Article extends \yii\db\ActiveRecord
 
     public function getImage()
     {
-        if($this->image)
-        {
+        if ($this->image) {
             return '/uploads/' . $this->image;
         }
         return '/no-image.png';
     }
 
-    public function getTopic(){
-        return $this->hasOne(Topic::className(),['id'=>'topic_id']);
+    public function getTopic()
+    {
+        return $this->hasOne(Topic::className(), ['id' => 'topic_id']);
     }
 
-    public function  deleteImage()
+    public function deleteImage()
     {
         $imageUploadModel = new ImageUpload();
         $imageUploadModel->deleteCurrentImage($this->image);
@@ -126,14 +126,10 @@ class Article extends \yii\db\ActiveRecord
         return $this->save();
     }
 
-
-    /**
-     * Gets query for [[Comments]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
     public function getComments()
     {
+
         return $this->hasMany(Comment::className(), ['article_id' => 'id']);
     }
 }
+
