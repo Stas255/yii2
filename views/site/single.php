@@ -22,8 +22,9 @@ $this->title = $article->title;
                 <?= $article->description; ?>
             </div>
             <div class="decoration">
-                <a href="#" class="btn btn-default">Decoration</a>
-                <a href="#" class="btn btn-default">Decoration</a>
+                <?php foreach (preg_split("/[\s,]+/",$article->tag) as $tag): ?>
+                <a href="#" class="btn btn-default"><?= $tag ?></a>
+                <?php endforeach; ?>
             </div>
 
             <div class="social-share">
