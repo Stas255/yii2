@@ -18,7 +18,7 @@ use yii\widgets\LinkPager;
 
                 </header>
                 <div class="entry-content">
-                    <p><?= $article->description;  ?>
+                    <p><?= mb_strimwidth($article->description,0, 360, "...");  ?>
                     </p>
 
                     <div class="btn-continue-reading text-center text-uppercase">

@@ -28,7 +28,13 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'title',
-            'description:ntext',
+            [
+                'format' => 'ntext',
+                'label' => 'description',
+                'value' => function ($data) {
+                    return mb_strimwidth($data->description,0, 360, "...");
+                }
+            ],
             'date',
             [
                 'format' => 'html',
