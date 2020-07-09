@@ -69,7 +69,7 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
-        $data = Article::getAll(1);
+        $data = Article::getAll(4);
 
         $popular = Article::find()->orderBy('viewed desc')->limit(3)->all();
         $recent = Article::find()->orderBy('date desc')->limit(3)->all();
@@ -115,7 +115,7 @@ class SiteController extends Controller
 
     public function actionTopic($id)
     {
-        $data = Topic::getArticlesByTopic($id);
+        $data = Topic::getArticlesByTopic($id,4);
         $popular = Article::find()->orderBy('viewed desc')->limit(3)->all();
         $recent = Article::find()->orderBy('date desc')->limit(3)->all();
         $topics = Topic::find()->all();
@@ -147,7 +147,7 @@ class SiteController extends Controller
 
         if (Yii::$app->request->isGet) {
             $model->load(Yii::$app->request->get());
-            $data =  $model->SearchAtricle();
+            $data =  $model->SearchAtricle(3);
             $popular = Article::find()->orderBy('viewed desc')->limit(3)->all();
             $recent = Article::find()->orderBy('date desc')->limit(3)->all();
             $topics = Topic::find()->all();

@@ -397,6 +397,17 @@ img.img-round {
 
 
 
+img.img-index {
+    max-height: 500px;
+}
+
+img.img-topic{
+    max-height: 330px;
+}
+
+img.img-sideBar{
+    max-height: 200px;
+}
 
 
 

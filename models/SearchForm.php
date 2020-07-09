@@ -18,7 +18,7 @@ class SearchForm extends Model
         ];
     }
 
-    public function SearchAtricle($pageSize = 1){
+    public function SearchAtricle($pageSize = 5){
 
         $query = Article::find()->andWhere(['like', 'tag','%' . $this->text . '%', false]);
 

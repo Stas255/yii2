@@ -7,7 +7,7 @@ use yii\widgets\LinkPager;
     <?php foreach ($articles as $article): ?>
         <article class="post">
             <div class="post-thumb">
-                <a href="<?= Url::toRoute(['/view', 'id'=>$article->id]) ?>"><img src="<?= $article->getImage()  ?>" alt=""></a>
+                <a href="<?= Url::toRoute(['/view', 'id'=>$article->id]) ?>"><img class="img-index" src="<?= $article->getImage()  ?>" alt=""></a>
             </div>
             <div class="post-content">
                 <header class="entry-header text-center text-uppercase">

@@ -9,7 +9,7 @@ use yii\widgets\LinkPager;
         <div class="row">
             <div class="col-md-6">
                 <div class="post-thumb">
-                    <a href="<?= Url::toRoute(['/view', 'id'=>$article->id]) ?>"><img src="<?= $article->getImage()  ?>" alt="" class="pull-left"></a>
+                    <a href="<?= Url::toRoute(['/view', 'id'=>$article->id]) ?>"><img class="img-topic" src="<?= $article->getImage()  ?>" alt="" class="pull-left"></a>
                 </div>
             </div>
             <div class="col-md-6">
@@ -20,7 +20,7 @@ use yii\widgets\LinkPager;
                         <h1 class="entry-title"><a href="<?= Url::toRoute(['/view', 'id'=>$article->id]) ?>"><?= $article->title;  ?></a></h1>
                     </header>
                     <div class="entry-content">
-                        <p><?= $article->description;  ?>
+                        <p><?= mb_strimwidth($article->description,0, 360, "...");  ?>
                         </p>
                     </div>
                     <div class="social-share">
