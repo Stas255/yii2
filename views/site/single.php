@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Url;
-
+$this->title = $article->title;
 ?>
 <div class="col-md-8">
     <article class="post">
@@ -27,14 +27,11 @@ use yii\helpers\Url;
             </div>
 
             <div class="social-share">
-							<span
-                                    class="social-share-title pull-left text-capitalize">By <?= $article->user->name; ?> On <?= $article->getDate(); ?></span>
                 <ul class="text-center pull-right">
-                    <li><a class="s-facebook" href="#"><i class="fa fa-facebook"></i></a></li>
-                    <li><a class="s-twitter" href="#"><i class="fa fa-twitter"></i></a></li>
-                    <li><a class="s-google-plus" href="#"><i class="fa fa-google-plus"></i></a></li>
-                    <li><a class="s-linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>
-                    <li><a class="s-instagram" href="#"><i class="fa fa-instagram"></i></a></li>
+                    <li><a class="s-facebook" href="https://www.facebook.com/sharer/sharer.php?u=<?= Url::base('http');?>"><i class="fa fa-facebook"></i></a></li>
+                    <li><a class="s-twitter" href="https://twitter.com/intent/tweet?url=<?= Url::base('http');?>"><i class="fa fa-twitter"></i></a></li>
+                    <li><a class="s-google-plus" href="https://plus.google.com/share?url=<?= Url::base('http');?>"><i class="fa fa-google-plus"></i></a></li>
+                    <li><a class="s-linkedin" href="http://www.linkedin.com/shareArticle?mini=true&url=<?= Url::base('http');?>"><i class="fa fa-linkedin"></i></a></li>
                 </ul>
             </div>
         </div>
@@ -56,7 +53,6 @@ use yii\helpers\Url;
             </form>
         </div><!--end leave comment-->
     <?php endif; ?>
-
 
     <?php if (!empty($commentsParent)): ?>
         <div class="comments-block">
@@ -105,25 +101,26 @@ use yii\helpers\Url;
                         <div class="comment-childs">
                             <?php foreach ($commentsChild as $commentChild): ?>
                                 <?php if ($commentChild->comment_id == $comment->id): ?>
-                            <div class="comment-block">
-                                <div class="comment">
-                                    <a href="#" class="comment-img">
-                                        <img class="img-round" src="<?= $commentChild->user->getImage(); ?>" alt="">
-                                    </a>
-                                    <div class="comment-body">
-                                        <div class="comment-top">
+                                    <div class="comment-block">
+                                        <div class="comment">
+                                            <a href="#" class="comment-img">
+                                                <img class="img-round" src="<?= $commentChild->user->getImage(); ?>"
+                                                     alt="">
+                                            </a>
+                                            <div class="comment-body">
+                                                <div class="comment-top">
 
-                                            <h5><?= $commentChild->user->name; ?></h5>
-                                            <p class="comment-date">
-                                                <?= $commentChild->getDate(); ?>
-                                            </p>
-                                        </div>
-                                        <div class="comment-text">
-                                            <?= $commentChild->text; ?>
+                                                    <h5><?= $commentChild->user->name; ?></h5>
+                                                    <p class="comment-date">
+                                                        <?= $commentChild->getDate(); ?>
+                                                    </p>
+                                                </div>
+                                                <div class="comment-text">
+                                                    <?= $commentChild->text; ?>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
                                 <?php endif; ?>
                             <?php endforeach; ?>
                         </div>
