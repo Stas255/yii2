@@ -28,7 +28,7 @@ use yii\helpers\Url;
 
             <div class="social-share">
 							<span
-                                    class="social-share-title pull-left text-capitalize">By <?= $article->user->name;  ?> On <?= $article->getDate(); ?></span>
+                                    class="social-share-title pull-left text-capitalize">By <?= $article->user->name; ?> On <?= $article->getDate(); ?></span>
                 <ul class="text-center pull-right">
                     <li><a class="s-facebook" href="#"><i class="fa fa-facebook"></i></a></li>
                     <li><a class="s-twitter" href="#"><i class="fa fa-twitter"></i></a></li>
@@ -58,9 +58,9 @@ use yii\helpers\Url;
     <?php endif; ?>
 
 
-    <?php if (!empty($comments)): ?>
+    <?php if (!empty($commentsParent)): ?>
         <div class="comments-block">
-            <?php foreach ($comments as $comment): ?>
+            <?php foreach ($commentsParent as $comment): ?>
                 <div class="comment-block">
                     <div class="comment">
                         <a href="#" class="comment-img">
@@ -68,7 +68,9 @@ use yii\helpers\Url;
                         </a>
                         <div class="comment-body">
                             <div class="comment-top">
-                                <a href="#" class="replay btn pull-right"> Replay</a>
+                                <?php if (!Yii::$app->user->isGuest): ?>
+                                    <button class="replay btn pull-right" onclick="ShowReplay(this)"> Replay</button>
+                                <?php endif; ?>
                                 <h5><?= $comment->user->name; ?></h5>
                                 <p class="comment-date">
                                     <?= $comment->getDate(); ?>
@@ -79,52 +81,51 @@ use yii\helpers\Url;
                             </div>
                         </div>
                     </div>
+                    <div class="replay-comment" hidden>
+                        <?php if (!Yii::$app->user->isGuest): ?>
+                            <?php $form = \yii\widgets\ActiveForm::begin([
+                                'action' => ['site/comment', 'id' => $article->id, 'id_comment' => $comment->id],
+                                'options' => ['class' => '', 'role' => 'form']]) ?>
+                            <div class="leave-comment-child"><!--leave comment-->
+                                <h4>Leave a reply for <?= $comment->user->name; ?></h4>
+                                <form class="form-horizontal contact-form" role="form" method="post" action="#">
+                                    <div class="form-group">
+                                        <div class="col-md-12">
+                                            <?= $form->field($commentForm, 'comment')->textarea(['class' => 'form-control', 'placeholder' => 'Write Message'])->label(false) ?>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn send-btn">Post Comment</button>
+                                    <?php \yii\widgets\ActiveForm::end() ?>
+                                </form>
+                            </div><!--end leave comment-->
+                        <?php endif; ?>
+                    </div>
+
                     <div class="comment-childs-container">
                         <div class="comment-childs">
+                            <?php foreach ($commentsChild as $commentChild): ?>
+                                <?php if ($commentChild->comment_id == $comment->id): ?>
                             <div class="comment-block">
                                 <div class="comment">
                                     <a href="#" class="comment-img">
-                                        <img class="img-round" src="assets/images/blog-1.jpg" alt="">
+                                        <img class="img-round" src="<?= $commentChild->user->getImage(); ?>" alt="">
                                     </a>
                                     <div class="comment-body">
                                         <div class="comment-top">
-                                            <a href="#" class="replay btn pull-right"> Replay</a>
-                                            <h5>Rubel Miah</h5>
+
+                                            <h5><?= $commentChild->user->name; ?></h5>
                                             <p class="comment-date">
-                                                December, 02, 2015 at 5:57 PM
+                                                <?= $commentChild->getDate(); ?>
                                             </p>
                                         </div>
                                         <div class="comment-text">
-                                            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                                            diam nonumy
-                                            eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
-                                            voluptua. At vero eos et cusam et justo duo dolores et ea rebum.
+                                            <?= $commentChild->text; ?>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="comment-block">
-                                <div class="comment">
-                                    <a href="#" class="comment-img">
-                                        <img class="img-round" src="assets/images/blog-1.jpg" alt="">
-                                    </a>
-                                    <div class="comment-body">
-                                        <div class="comment-top">
-                                            <a href="#" class="replay btn pull-right"> Replay</a>
-                                            <h5>Rubel Miah</h5>
-                                            <p class="comment-date">
-                                                December, 02, 2015 at 5:57 PM
-                                            </p>
-                                        </div>
-                                        <div class="comment-text">
-                                            Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed
-                                            diam nonumy
-                                            eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
-                                            voluptua. At vero eos et cusam et justo duo dolores et ea rebum.
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
                         </div>
                     </div>
                 </div>
@@ -133,6 +134,16 @@ use yii\helpers\Url;
     <?php endif; ?>
 
 </div>
+
+<script>
+    function ShowReplay(button) {
+        var comment = button.parentElement.parentElement.parentElement.parentElement;
+        var repl = comment.getElementsByClassName('replay-comment')[0];
+        repl.hidden = !repl.hidden;
+        console.log(repl);
+    }
+</script>
+
 <?php
 echo \Yii::$app->view->renderFile('@app/views/site/right.php', compact('popular', 'recent', 'topics'));
 ?>

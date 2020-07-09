@@ -358,3 +358,10 @@ img.img-round {
     font-size: 18px;
     line-height: 24px;
 }
+
+
+/*Коментарі Child*/
+.leave-comment-child{
+    background-color: white;
+    padding: 10px;
+}

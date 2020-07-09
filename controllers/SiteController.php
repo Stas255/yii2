@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models;
 use app\models\Article;
 use app\models\CommentForm;
 use app\models\Topic;
@@ -70,7 +71,7 @@ class SiteController extends Controller
         $data = Article::getAll(1);
 
         $popular = Article::find()->orderBy('viewed desc')->limit(3)->all();
-        $recent = Article::find()->orderBy('date asc')->limit(3)->all();
+        $recent = Article::find()->orderBy('date desc')->limit(3)->all();
         $topics = Topic::find()->all();
 
         return $this->render('index', [
@@ -86,10 +87,16 @@ class SiteController extends Controller
     {
         $article = Article::findOne($id);
         $popular = Article::find()->orderBy('viewed desc')->limit(3)->all();
-        $recent = Article::find()->orderBy('date asc')->limit(3)->all();
+        $recent = Article::find()->orderBy('date desc')->limit(3)->all();
         $topics = Topic::find()->all();
 
         $comments = $article->comments;
+        $commentsParent = array_filter($comments, function($k) {
+            return $k['comment_id'] == null;
+        });
+        $commentsChild = array_filter($comments, function($k) {
+            return $k['comment_id'] != null;
+        });
         $commentForm = new CommentForm();
 
         $article->viewedCounter();
@@ -99,7 +106,8 @@ class SiteController extends Controller
             'popular' => $popular,
             'recent' => $recent,
             'topics' => $topics,
-            'comments' => $comments,
+            'commentsParent' => $commentsParent,
+            'commentsChild' => $commentsChild,
             'commentForm' => $commentForm,
         ]);
     }
@@ -108,7 +116,7 @@ class SiteController extends Controller
     {
         $data = Topic::getArticlesByTopic($id);
         $popular = Article::find()->orderBy('viewed desc')->limit(3)->all();
-        $recent = Article::find()->orderBy('date asc')->limit(3)->all();
+        $recent = Article::find()->orderBy('date desc')->limit(3)->all();
         $topics = Topic::find()->all();
 
         return $this->render('topic', [
@@ -120,14 +128,14 @@ class SiteController extends Controller
         ]);
     }
 
-    public function actionComment($id)
+    public function actionComment($id, $id_comment = null)
     {
         $model = new CommentForm();
 
         if (Yii::$app->request->isPost)
         {
             $model->load(Yii::$app->request->post());
-            if($model->saveComment($id))
+            if($model->saveComment($id,$id_comment))
             {
                 return $this->redirect(['site/view','id'=>$id]);
             }
