@@ -141,6 +141,7 @@ class UserController extends Controller
     public function actionSetImage($id)
     {
         $this->check($id);
+
         $modelUser = new ImageUpload;
 
         if (Yii::$app->request->isPost)

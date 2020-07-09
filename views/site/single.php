@@ -29,6 +29,7 @@ $this->title = $article->title;
             </div>
 
             <div class="social-share">
+                <span class="social-share-title pull-left text-capitalize">By <?= $article->user->name;  ?> On <?= $article->getDate();  ?></span>
                 <ul class="text-center pull-right">
                     <li><a class="s-facebook"
                            href="https://www.facebook.com/sharer/sharer.php?u=<?= Url::base('http'); ?>"><i

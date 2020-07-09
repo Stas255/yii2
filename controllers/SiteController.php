@@ -119,13 +119,12 @@ class SiteController extends Controller
         $popular = Article::find()->orderBy('viewed desc')->limit(3)->all();
         $recent = Article::find()->orderBy('date desc')->limit(3)->all();
         $topics = Topic::find()->all();
-
         return $this->render('topic', [
             'articles' => $data['articles'],
             'pagination' => $data['pagination'],
             'popular' => $popular,
             'recent' => $recent,
-            'topics' => $topics
+            'topics' => $topics,
         ]);
     }
 

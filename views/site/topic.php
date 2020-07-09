@@ -20,7 +20,7 @@ use yii\widgets\LinkPager;
                         <h1 class="entry-title"><a href="<?= Url::toRoute(['/view', 'id'=>$article->id]) ?>"><?= $article->title;  ?></a></h1>
                     </header>
                     <div class="entry-content">
-                        <p><?= mb_strimwidth($article->description,0, 360, "...");  ?>
+                        <p><?= substr($article->description,0, 360) . '...';  ?>
                         </p>
                     </div>
                     <div class="social-share">
