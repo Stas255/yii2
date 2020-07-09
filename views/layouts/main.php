@@ -4,6 +4,7 @@
 
 /* @var $content string */
 
+use app\models\SearchForm;
 use app\widgets\Alert;
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
@@ -42,9 +43,10 @@ AppAsset::register($this);
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
             ['label' => 'Home', 'url' => ['/site/index']],
+
             Yii::$app->user->isGuest ? (
             ['label' => 'Login', 'url' => ['/auth/login']]
-            ) : (
+            ) :
                 '<li>'
                 . Html::beginForm(['/user/user'], 'post')
                 . Html::submitButton(
@@ -68,16 +70,10 @@ AppAsset::register($this);
                 )
                 . Html::endForm()
                 . '</li>'
-            )
+
         ],
     ]);
     ?>
-    <form class="navbar-form navbar-right" role="search">
-        <div class="form-group">
-            <input type="text" placeholder="Search..">
-        </div>
-        <button type="submit"><i class="fa fa-search"></i></button>
-    </form>
     <?php
     NavBar::end();
     ?>

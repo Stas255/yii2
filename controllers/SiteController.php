@@ -5,6 +5,7 @@ namespace app\controllers;
 use app\models;
 use app\models\Article;
 use app\models\CommentForm;
+use app\models\SearchForm;
 use app\models\Topic;
 use Yii;
 use yii\data\Pagination;
@@ -91,10 +92,10 @@ class SiteController extends Controller
         $topics = Topic::find()->all();
 
         $comments = $article->comments;
-        $commentsParent = array_filter($comments, function($k) {
+        $commentsParent = array_filter($comments, function ($k) {
             return $k['comment_id'] == null;
         });
-        $commentsChild = array_filter($comments, function($k) {
+        $commentsChild = array_filter($comments, function ($k) {
             return $k['comment_id'] != null;
         });
         $commentForm = new CommentForm();
@@ -132,14 +133,35 @@ class SiteController extends Controller
     {
         $model = new CommentForm();
 
-        if (Yii::$app->request->isPost)
-        {
+        if (Yii::$app->request->isPost) {
             $model->load(Yii::$app->request->post());
-            if($model->saveComment($id,$id_comment))
-            {
-                return $this->redirect(['site/view','id'=>$id]);
+            if ($model->saveComment($id, $id_comment)) {
+                return $this->redirect(['site/view', 'id' => $id]);
             }
         }
+    }
+
+    public function actionSearch()
+    {
+        $model = new SearchForm();
+
+        if (Yii::$app->request->isGet) {
+            $model->load(Yii::$app->request->get());
+            $data =  $model->SearchAtricle();
+
+            $popular = Article::find()->orderBy('viewed desc')->limit(3)->all();
+            $recent = Article::find()->orderBy('date desc')->limit(3)->all();
+            $topics = Topic::find()->all();
+
+            return $this->render('search',[
+                'articles' => $data['articles'],
+                'pagination' => $data['pagination'],
+                'popular' => $popular,
+                'recent' => $recent,
+                'topics' => $topics
+            ]);
+        }
+
     }
 
 

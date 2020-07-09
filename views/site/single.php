@@ -1,6 +1,7 @@
 <?php
 
 use yii\helpers\Url;
+
 $this->title = $article->title;
 ?>
 <div class="col-md-8">
@@ -22,17 +23,23 @@ $this->title = $article->title;
                 <?= $article->description; ?>
             </div>
             <div class="decoration">
-                <?php foreach (preg_split("/[\s,]+/",$article->tag) as $tag): ?>
-                <a href="#" class="btn btn-default"><?= $tag ?></a>
+                <?php foreach (preg_split("/[\s,]+/", $article->tag) as $tag): ?>
+                    <a href="#" class="btn btn-default"><?= $tag ?></a>
                 <?php endforeach; ?>
             </div>
 
             <div class="social-share">
                 <ul class="text-center pull-right">
-                    <li><a class="s-facebook" href="https://www.facebook.com/sharer/sharer.php?u=<?= Url::base('http');?>"><i class="fa fa-facebook"></i></a></li>
-                    <li><a class="s-twitter" href="https://twitter.com/intent/tweet?url=<?= Url::base('http');?>"><i class="fa fa-twitter"></i></a></li>
-                    <li><a class="s-google-plus" href="https://plus.google.com/share?url=<?= Url::base('http');?>"><i class="fa fa-google-plus"></i></a></li>
-                    <li><a class="s-linkedin" href="http://www.linkedin.com/shareArticle?mini=true&url=<?= Url::base('http');?>"><i class="fa fa-linkedin"></i></a></li>
+                    <li><a class="s-facebook"
+                           href="https://www.facebook.com/sharer/sharer.php?u=<?= Url::base('http'); ?>"><i
+                                    class="fa fa-facebook"></i></a></li>
+                    <li><a class="s-twitter" href="https://twitter.com/intent/tweet?url=<?= Url::base('http'); ?>"><i
+                                    class="fa fa-twitter"></i></a></li>
+                    <li><a class="s-google-plus" href="https://plus.google.com/share?url=<?= Url::base('http'); ?>"><i
+                                    class="fa fa-google-plus"></i></a></li>
+                    <li><a class="s-linkedin"
+                           href="http://www.linkedin.com/shareArticle?mini=true&url=<?= Url::base('http'); ?>"><i
+                                    class="fa fa-linkedin"></i></a></li>
                 </ul>
             </div>
         </div>
@@ -85,15 +92,14 @@ $this->title = $article->title;
                                 'options' => ['class' => '', 'role' => 'form']]) ?>
                             <div class="leave-comment-child"><!--leave comment-->
                                 <h4>Leave a reply for <?= $comment->user->name; ?></h4>
-                                <form class="form-horizontal contact-form" role="form" method="post" action="#">
-                                    <div class="form-group">
-                                        <div class="col-md-12">
-                                            <?= $form->field($commentForm, 'comment')->textarea(['class' => 'form-control', 'placeholder' => 'Write Message'])->label(false) ?>
-                                        </div>
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <?= $form->field($commentForm, 'comment')->textarea(['class' => 'form-control', 'placeholder' => 'Write Message'])->label(false) ?>
                                     </div>
-                                    <button type="submit" class="btn send-btn">Post Comment</button>
-                                    <?php \yii\widgets\ActiveForm::end() ?>
-                                </form>
+                                </div>
+                                <button type="submit" class="btn send-btn">Post Comment</button>
+                                <?php \yii\widgets\ActiveForm::end() ?>
+
                             </div><!--end leave comment-->
                         <?php endif; ?>
                     </div>
