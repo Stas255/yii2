@@ -38,6 +38,7 @@ $config = [
                 ''=>'site/index',
                 '<action>'=>'site/<action>',
                 'admin/index' => 'admin/default/index',
+                'user/index' => 'user/default/index',
                 '<action>'=>'default/<action>',
                 '/login' => 'site/login',
                 '<action>'=>'site/<action>',
@@ -47,6 +48,9 @@ $config = [
     'modules' => [
         'admin' => [
             'class' => 'app\modules\admin\Module',
+        ],
+        'user' => [
+            'class' => 'app\modules\user\Module',
         ],
     ],
     'params' => $params,

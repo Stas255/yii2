@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use app\models\User;
@@ -48,6 +49,38 @@ class UserSearch extends User
             'query' => $query,
         ]);
 
+        $this->load($params);
+
+        if (!$this->validate()) {
+            // uncomment the following line if you do not want to return any records when validation fails
+            // $query->where('0=1');
+            return $dataProvider;
+        }
+
+        // grid filtering conditions
+        $query->andFilterWhere([
+            'id' => $this->id,
+        ]);
+
+        $query->andFilterWhere(['like', 'name', $this->name])
+            ->andFilterWhere(['like', 'login', $this->login])
+            ->andFilterWhere(['like', 'password', $this->password])
+            ->andFilterWhere(['like', 'image', $this->image]);
+
+        return $dataProvider;
+    }
+
+    public function searchByUser()
+    {
+        $query = User::find();
+
+        // add conditions that should always apply here
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+
+        $params['UserSearch']['id'] = Yii::$app->user->id;
         $this->load($params);
 
         if (!$this->validate()) {

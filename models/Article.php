@@ -36,10 +36,11 @@ class Article extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['title', 'description', 'tag', 'viewed', 'topic_id', 'user_id'], 'required'],
+            [['title', 'description', 'tag', 'topic_id', 'user_id'], 'required'],
             [['title', 'description'], 'string'],
             [['date'], 'date', 'format' => 'php:Y-m-d'],
             [['date'], 'default', 'value' => date('Y-m-d')],
+            [['viewed'], 'default', 'value' => 0],
             [['title'], 'string', 'max' => 255],
 
         ];
