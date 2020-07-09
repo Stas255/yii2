@@ -3,7 +3,11 @@ use yii\helpers\Url;
 use yii\widgets\LinkPager;
 ?>
 
+
 <div class="col-md-8">
+    <div style="text-align: center" >
+        <h2>Search by tag (<?= $search ?>)</h2>
+    </div>
     <?php foreach ($articles as $article): ?>
         <article class="post">
             <div class="post-thumb">

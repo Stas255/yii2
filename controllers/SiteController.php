@@ -148,7 +148,6 @@ class SiteController extends Controller
         if (Yii::$app->request->isGet) {
             $model->load(Yii::$app->request->get());
             $data =  $model->SearchAtricle();
-
             $popular = Article::find()->orderBy('viewed desc')->limit(3)->all();
             $recent = Article::find()->orderBy('date desc')->limit(3)->all();
             $topics = Topic::find()->all();
@@ -158,7 +157,8 @@ class SiteController extends Controller
                 'pagination' => $data['pagination'],
                 'popular' => $popular,
                 'recent' => $recent,
-                'topics' => $topics
+                'topics' => $topics,
+                'search' => $model->text
             ]);
         }
 

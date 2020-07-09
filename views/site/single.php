@@ -24,7 +24,7 @@ $this->title = $article->title;
             </div>
             <div class="decoration">
                 <?php foreach (preg_split("/[\s,]+/", $article->tag) as $tag): ?>
-                    <a href="#" class="btn btn-default"><?= $tag ?></a>
+                    <a href="/search?SearchForm[text]=<?= $tag?>" class="btn btn-default"><?= $tag ?></a>
                 <?php endforeach; ?>
             </div>
 
