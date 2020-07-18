@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models;
 use app\models\Article;
+use app\models\Comment;
 use app\models\CommentForm;
 use app\models\SearchForm;
 use app\models\Topic;
@@ -96,12 +97,12 @@ class SiteController extends Controller
             return $k['comment_id'] == null;
         });
         $commentsChild = array_filter($comments, function ($k) {
-            return $k['comment_id'] != null;
+            return ($k['comment_id'] != null && !$k['delete']);
         });
         $commentForm = new CommentForm();
 
         $article->viewedCounter();
-
+//var_dump(array_search(12, array_column($commentsChild, 'comment_id')));die();
         return $this->render('single', [
             'article' => $article,
             'popular' => $popular,
@@ -161,6 +162,18 @@ class SiteController extends Controller
             ]);
         }
 
+    }
+
+    public function actionCommentDelete($id, $id_comment)
+    {
+        if(Yii::$app->request->isPost){
+            $data = Comment::findOne($id_comment);
+            if($data->user_id == Yii::$app->user->id){
+                $data->delete = true;
+                $data-> save(false);
+            }
+            return $this->redirect(['site/view', 'id' => $id]);
+        }
     }
 
 

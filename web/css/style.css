@@ -412,3 +412,12 @@ img.img-sideBar{
 
 
 
+i.fa.fa-trash {
+    font-size: 2.5em;
+}
+.comment-delete {
+    float: right;
+}
+
+
+
